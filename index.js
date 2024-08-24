@@ -60,3 +60,45 @@ readline.question("site url: ", (url) => {
     readline.close();
   })();
 });
+/** to browser console */
+/* 
+(function () {
+  // Ensure the document is focused
+  window.focus();
+
+  // Get the host of the current page
+  const siteHost = window.location.host;
+
+  // Get all <a> elements on the page
+  const links = document.querySelectorAll("a");
+
+  // Use a Set to store unique URLs
+  const uniqueUrls = new Set();
+
+  // Iterate through each link to filter and store internal links
+  links.forEach((link) => {
+    const href = link.href;
+
+    // Try to construct a new URL object and handle exceptions
+    try {
+      const url = new URL(href, window.location.origin); // Use window.location.origin as a base URL for relative links
+      const linkHost = url.host;
+
+      // Check if the link is an internal link and not a fragment identifier (#)
+      if (href && href.indexOf("#") === -1 && linkHost === siteHost) {
+        uniqueUrls.add(url.href); // Add the full absolute URL to the set
+      }
+    } catch (error) {
+      // If URL construction fails, log the error and continue
+      console.warn(`Skipping invalid URL: ${href}`);
+    }
+  });
+
+  // Convert the Set to an array and join the links into a single string separated by newlines
+  const csvContent = Array.from(uniqueUrls).join("\n");
+
+  // Attempt to copy to clipboard using Clipboard API
+ console.log(csvContent)
+ console.log(uniqueUrls.size)
+})();
+*/
